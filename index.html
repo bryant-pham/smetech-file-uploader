@@ -40,7 +40,7 @@
         }
 
         .error-msg {
-            background-color: #EF350;
+            background-color: #EF5350;
         }
 
         .visible {
@@ -91,7 +91,7 @@
             function showSuccessMessage(link) {
                 $('.success-msg').removeClass('hidden');
                 $('.success-msg').addClass('visible');
-                $('#success-text').text('Success! Your page can be viewed at ');
+                $('#success-text').text('Success! View your page at ');
                 $('#success-link').text(link);
                 var fqdn = 'http://' + link;
                 console.log(fqdn);
@@ -120,7 +120,7 @@
                 </div>
                 <div class="form-group">
                     <label for="file_input">Webpage File</label>
-                    <input type="file" id="file_input" name="file" accept="html">
+                    <input type="file" id="file_input" name="file" accept=".html">
                 </div>
                 <button class="btn btn-primary">Upload</button>
                 <div class="success-msg result-msg hidden">
