@@ -1,0 +1,136 @@
+<html>
+<head>
+    <title>Website Upload</title>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script> 
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            height: 100%;
+        }
+
+        .container {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        button {
+            margin: 10px 0;
+        }
+
+        h2 {
+            margin-bottom: 50px;
+        }
+
+        .success-msg {
+            background-color: #81C784;
+        }
+
+        .error-msg {
+            background-color: #EF350;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }        
+
+        .result-msg {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $('#form').on('submit', function(e) {
+                var formData = new FormData($(this)[0]);
+                hideMessage();
+                $.ajax({
+                    url: '/upload',
+                    type: 'POST',
+                    contentType: false,
+                    data: formData,
+                    success: function(response) {
+                        console.log(response);
+                        showSuccessMessage(response.link);
+                    },
+                    error: function(response) {
+                        console.log(response);
+                        showErrorMessage();
+                    },
+                    processData: false
+                });
+                e.preventDefault();
+            });
+
+            function hideMessage() {
+                $('.success-msg').removeClass('visible');
+                $('.error-msg').removeClass('visible');
+                $('.success-msg').addClass('hidden');
+                $('.error-msg').addClass('hidden');
+            }
+
+            function showSuccessMessage(link) {
+                $('.success-msg').removeClass('hidden');
+                $('.success-msg').addClass('visible');
+                $('#success-text').text('Success! Your page can be viewed at ');
+                $('#success-link').text(link);
+                var fqdn = 'http://' + link;
+                console.log(fqdn);
+                $('#success-link').attr('href', fqdn);
+            }
+
+            function showErrorMessage() {
+                $('.error-msg').removeClass('hidden');
+                $('.error-msg').addClass('visible');
+                $('.error-msg').text('Error! Please try again or ask for help');
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div></div>
+        <div>
+            <h2>Upload your webpage!</h2>
+            <form id="form">
+                <div class="form-group">
+                    <label for="student">Student</label>
+                    <select id="student" name="student" class="form-control">
+                        <option value="bryant">Bryant</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="file_input">Webpage File</label>
+                    <input type="file" id="file_input" name="file" accept="html">
+                </div>
+                <button class="btn btn-primary">Upload</button>
+                <div class="success-msg result-msg hidden">
+                    <span id="success-text"></span> 
+                    <a id="success-link" target="_blank"></a>
+                </div>
+                <div class="error-msg result-msg hidden"></div>
+            </form>
+        </div>
+        <div></div>
+    </div>
+</body>
+</html>
