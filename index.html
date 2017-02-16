@@ -56,6 +56,19 @@
             margin-top: 10px;
             border-radius: 5px;
         }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .sites-nav a {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .info {
+            margin-top: 25px;
+        }
     </style>
 
     <script>
@@ -94,7 +107,6 @@
                 $('#success-text').text('Success! View your page at ');
                 $('#success-link').text(link);
                 var fqdn = 'http://' + link;
-                console.log(fqdn);
                 $('#success-link').attr('href', fqdn);
             }
 
@@ -110,11 +122,16 @@
     <div class="container">
         <div></div>
         <div>
-            <h2>Upload your webpage!</h2>
+            <h2>Upload your website!</h2>
             <form id="form">
                 <div class="form-group">
                     <label for="student">Student</label>
                     <select id="student" name="student" class="form-control">
+                        <option value="thomas">Thomas Moss</option>
+                        <option value="tiffany">Tiffany Lam</option>
+                        <option value="jennifer">Jennifer Miranda</option>
+                        <option value="isabella">Isabella Hage</option>
+                        <option value="richard">Richard Lam</option>
                         <option value="bryant">Bryant</option>
                     </select>
                 </div>
@@ -128,9 +145,17 @@
                     <a id="success-link" target="_blank"></a>
                 </div>
                 <div class="error-msg result-msg hidden"></div>
+                <div class="info"><small>If you have any questions or problems, contact<br>Mr. Pham at bryantphamm@gmail.com</small></div>
             </form>
         </div>
-        <div></div>
+        <div class="sites-nav">
+            <h3>Sites</h3>
+            <a class="btn btn-primary" target="_blank" href="/thomas">sites.smetech.club/thomas</a>
+            <a class="btn btn-success" target="_blank" href="/tiffany">sites.smetech.club/tiffany</a>
+            <a class="btn btn-info" target="_blank" href="/jennifer">sites.smetech.club/jennifer</a>
+            <a class="btn btn-warning" target="_blank" href="/isabella">sites.smetech.club/isabella</a>
+            <a class="btn btn-danger" target="_blank" href="/richard">sites.smetech.club/richard</a>
+        </div>
     </div>
 </body>
 </html>
